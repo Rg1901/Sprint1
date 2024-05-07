@@ -1,0 +1,5 @@
+[
+    {"bookingId": "123456789012", "status": "Shipment is being processed", "date": "May 5, 2024"},
+    {"bookingId": "123456789012", "status": "Out for delivery", "date": "May 8, 2024"},
+    {"bookingId": "123456789012", "status": "Delivered", "date": "May 10, 2024"}
+]

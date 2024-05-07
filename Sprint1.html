@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .input-group input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-group button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .tracking-status {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .tracking-status.active {
+            display: block;
+        }
+
+        .status {
+            margin-bottom: 10px;
+        }
+
+        .status .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #007bff;
+            margin-right: 10px;
+        }
+
+        .status .text {
+            font-size: 16px;
+        }
+
+        .status .date {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-group">
+            <input type="text" id="bookingId" placeholder="Enter Booking ID (12 digits)">
+            <button onclick="trackPackage()">Search</button>
+        </div>
+        <div class="error-message" id="errorMessage"></div>
+        <div class="tracking-status" id="trackingStatus">
+            <!-- Tracking status updates will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function trackPackage() {
+            var bookingId = document.getElementById('bookingId').value;
+            var errorMessage = document.getElementById('errorMessage');
+            var trackingStatusElement = document.getElementById('trackingStatus');
+            errorMessage.textContent = ''; // Clear previous error message
+            trackingStatusElement.innerHTML = ''; // Clear previous status updates
+            
+            if (bookingId.length !== 12 || isNaN(bookingId)) {
+                errorMessage.textContent = 'Please enter a valid Booking ID with exactly 12 digits.';
+                return; // Exit the function if the Booking ID is invalid
+            }
+
+            // Here you can implement logic to fetch status updates based on the booking ID
+            // For demonstration, let's assume we have some predefined status updates
+            var statusUpdates = [
+                { status: 'Shipment is being processed', date: 'May 5, 2024' },
+                { status: 'Out for delivery', date: 'May 8, 2024' },
+                { status: 'Delivered', date: 'May 10, 2024' }
+            ];
+
+            statusUpdates.forEach(function(update) {
+                var statusDiv = document.createElement('div');
+                statusDiv.classList.add('status');
+
+                var circleDiv = document.createElement('div');
+                circleDiv.classList.add('circle');
+
+                var textDiv = document.createElement('div');
+                textDiv.classList.add('text');
+                textDiv.textContent = update.status;
+
+                var dateDiv = document.createElement('div');
+                dateDiv.classList.add('date');
+                dateDiv.textContent = 'Date: ' + update.date;
+
+                statusDiv.appendChild(circleDiv);
+                statusDiv.appendChild(textDiv);
+                statusDiv.appendChild(dateDiv);
+
+                trackingStatusElement.appendChild(statusDiv);
+            });
+
+            // Show the tracking status container
+            trackingStatusElement.classList.add('active');
+        }
+    </script>
+</body>
+</html>
