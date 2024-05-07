@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        #packageStatus {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .status {
+            margin-bottom: 10px;
+        }
+
+        .text {
+            font-size: 16px;
+        }
+
+        .date {
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Package Tracking System - Admin</h1>
+        <button id="logoutBtn">Logout</button>
+    </header>
+
+    <main>
+        <div class="container">
+            <form id="searchForm">
+                <input type="text" id="customerId" placeholder="Customer ID (12 digits)">
+                <input type="text" id="bookingId" placeholder="Booking ID">
+                <button type="submit">Search</button>
+            </form>
+    
+            <div id="packageStatus">
+                <!-- Package status updates will be displayed here -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Function to handle form submission
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Retrieve customer ID and booking ID from the form
+            var customerId = document.getElementById('customerId').value;
+            var bookingId = document.getElementById('bookingId').value;
+
+            // Check if customer ID contains exactly 12 digits
+            if (!/^\d{12}$/.test(customerId)) {
+                alert('Please enter a valid Customer ID with exactly 12 digits.');
+                return;
+            }
+
+            // Call a function to fetch package status based on customer ID or booking ID
+            fetchPackageStatus(customerId, bookingId);
+        });
+
+        // Function to fetch package status from the backend
+        function fetchPackageStatus(customerId, bookingId) {
+            // Placeholder code to simulate fetching package status
+            var allStatusUpdates = [
+                {"customerId": "123456789012", "bookingId": "9876543210", "status": "Shipment is being processed", "date": "May 5, 2024"},
+                {"customerId": "123456789012", "bookingId": "9876543210", "status": "Out for delivery", "date": "May 8, 2024"},
+                {"customerId": "123456789012", "bookingId": "9876543210", "status": "Delivered", "date": "May 10, 2024"},
+                {"customerId": "123456789013", "bookingId": "1234567891", "status": "Shipment is being processed", "date": "July 31, 2024"},
+                {"customerId": "123456789013", "bookingId": "1234567891", "status": "Out for delivery", "date": "August 8, 2024"},
+                {"customerId": "123456789013", "bookingId": "1234567891", "status": "Delivered", "date": "August 10, 2024"}
+            ];
+
+            // Filter status updates based on customer ID or booking ID
+            var filteredStatusUpdates = allStatusUpdates.filter(function(update) {
+                return (update.customerId === customerId || update.bookingId === bookingId);
+            });
+
+            // Display package status updates
+            var packageStatusDiv = document.getElementById('packageStatus');
+            packageStatusDiv.innerHTML = ''; // Clear previous status updates
+
+            filteredStatusUpdates.forEach(function(update) {
+                var statusDiv = document.createElement('div');
+                statusDiv.classList.add('status');
+
+                var textDiv = document.createElement('div');
+                textDiv.classList.add('text');
+                textDiv.textContent = update.status;
+
+                var dateDiv = document.createElement('div');
+                dateDiv.classList.add('date');
+                dateDiv.textContent = 'Date: ' + update.date;
+
+                statusDiv.appendChild(textDiv);
+                statusDiv.appendChild(dateDiv);
+
+                packageStatusDiv.appendChild(statusDiv);
+            });
+        }
+
+        // Function to handle logout button click
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // Placeholder code to simulate logging out
+            alert('Logged out!');
+            // Redirect to login page or perform any other necessary actions
+        });
+    </script>
+</body>
+</html>

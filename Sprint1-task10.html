@@ -12,6 +12,32 @@
             padding: 0;
         }
 
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
         .container {
             max-width: 600px;
             margin: 50px auto;
@@ -84,16 +110,23 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="input-group">
-            <input type="text" id="bookingId" placeholder="Enter Booking ID (12 digits)">
-            <button onclick="trackPackage()">Search</button>
+    <header>
+        <h1>Package Tracking System - User</h1>
+        <button id="logoutBtn">Logout</button>
+    </header>
+    <main>
+        <div class="container">
+            <div class="input-group">
+                <input type="text" id="bookingId" placeholder="Enter Booking ID (12 digits)">
+                <button onclick="trackPackage()">Search</button>
+            </div>
+            <div class="error-message" id="errorMessage"></div>
+            <div class="tracking-status" id="trackingStatus">
+                <!-- Tracking status updates will be displayed here -->
+            </div>
         </div>
-        <div class="error-message" id="errorMessage"></div>
-        <div class="tracking-status" id="trackingStatus">
-            <!-- Tracking status updates will be displayed here -->
-        </div>
-    </div>
+    </main>
+    
 
     <script>
         function trackPackage() {
